@@ -121,7 +121,7 @@ var RegisterForm = function (_React$Component) {
           ),
           React.createElement('input', { onChange: function onChange(e) {
               return _this2.handleChange(e);
-            }, type: 'text', id: 'password', name: 'user_password' }),
+            }, type: 'password', id: 'password', name: 'user_password' }),
           React.createElement(
             'span',
             { className: 'error', 'aria-live': 'polite' },

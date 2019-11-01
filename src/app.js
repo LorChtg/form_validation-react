@@ -69,7 +69,7 @@ class RegisterForm extends React.Component {
         </label>
         <label htmlFor="password" className="field">
           <span className="label">Password</span>
-          <input onChange={e => this.handleChange(e)} type="text" id="password" name="user_password" />
+          <input onChange={e => this.handleChange(e)} type="password" id="password" name="user_password" />
           <span className="error" aria-live="polite">{this.state.password_error}</span>
         </label>
         <button>Submit</button>
