@@ -24,9 +24,29 @@ var RegisterForm = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (RegisterForm.__proto__ || Object.getPrototypeOf(RegisterForm)).call(this, props));
 
+    _this.handleValidation = function (fieldName, fieldValue) {
+      switch (fieldName) {
+        case 'user_name':
+          _this.state.name_error = 'invalid username';
+          break;
+        case 'user_email':
+          _this.state.email_error = 'invalid mail';
+          break;
+        case 'user_password':
+          _this.state.password_error = 'invalid password';
+          break;
+        default:
+          break;
+      }
+    };
+
     _this.handleChange = function (e) {
-      _this.setState(_defineProperty({}, e.target.name, e.target.value));
-      console.log(_this.state);
+      var name = e.target.name;
+      var value = e.target.value;
+      _this.setState(_defineProperty({}, name, value), function () {
+        _this.handleValidation(name, value);
+      });
+      //console.log(this.state)
     };
 
     _this.handleSubmit = function (e) {
@@ -36,8 +56,14 @@ var RegisterForm = function (_React$Component) {
 
     _this.state = {
       user_name: '',
+      name_valid: 'false',
+      name_error: '',
       user_email: '',
-      user_password: ''
+      email_valid: 'false',
+      email_error: '',
+      user_password: '',
+      password_valid: 'false',
+      password_error: ''
     };
     _this.handleChange = _this.handleChange.bind(_this);
     _this.handleSubmit = _this.handleSubmit.bind(_this);
@@ -62,8 +88,12 @@ var RegisterForm = function (_React$Component) {
             { className: 'label' },
             'Username'
           ),
-          React.createElement('input', { onChange: this.handleChange, type: 'text', id: 'username', name: 'user_name', required: true, pattern: userNamePattern }),
-          React.createElement('span', { className: 'error', 'aria-live': 'polite' })
+          React.createElement('input', { onChange: this.handleChange, type: 'text', id: 'username', name: 'user_name' }),
+          React.createElement(
+            'span',
+            { className: 'error', 'aria-live': 'polite' },
+            this.state.name_error
+          )
         ),
         React.createElement(
           'label',
@@ -73,8 +103,12 @@ var RegisterForm = function (_React$Component) {
             { className: 'label' },
             'Email address'
           ),
-          React.createElement('input', { onChange: this.handleChange, type: 'email', id: 'email', name: 'user_email', required: true, pattern: mailPattern }),
-          React.createElement('span', { className: 'error', 'aria-live': 'polite' })
+          React.createElement('input', { onChange: this.handleChange, type: 'email', id: 'email', name: 'user_email' }),
+          React.createElement(
+            'span',
+            { className: 'error', 'aria-live': 'polite' },
+            this.state.email_error
+          )
         ),
         React.createElement(
           'label',
@@ -84,8 +118,12 @@ var RegisterForm = function (_React$Component) {
             { className: 'label' },
             'Password'
           ),
-          React.createElement('input', { onChange: this.handleChange, type: 'text', id: 'password', name: 'user_password', required: true, pattern: passwordPattern }),
-          React.createElement('span', { className: 'error', 'aria-live': 'polite' })
+          React.createElement('input', { onChange: this.handleChange, type: 'text', id: 'password', name: 'user_password' }),
+          React.createElement(
+            'span',
+            { className: 'error', 'aria-live': 'polite' },
+            this.state.password_error
+          )
         ),
         React.createElement(
           'button',
