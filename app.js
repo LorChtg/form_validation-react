@@ -31,7 +31,6 @@ var RegisterForm = function (_React$Component) {
       switch (fieldName) {
         case 'user_name':
           userNamePattern.test(fieldValue) ? _this.state.name_error = '' : _this.state.name_error = 'please, enter a username long of 1 to 30 letters';
-          //userNamePattern.test(fieldValue) ? this.state.name_valid = true : this.state.name_valid = false
           break;
         case 'user_email':
           mailPattern.test(fieldValue) ? _this.state.email_error = '' : _this.state.email_error = 'please, enter a valid gmail address';
@@ -48,13 +47,11 @@ var RegisterForm = function (_React$Component) {
       var name = e.target.name;
       var value = e.target.value;
       _this.setState(_defineProperty({}, name, value));
-      console.log(_this.state);
       _this.handleValidation(name, value);
     };
 
     _this.handleSubmit = function (e) {
       e.preventDefault();
-      //console.log(this.state)
     };
 
     _this.state = {

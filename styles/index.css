@@ -44,19 +44,9 @@ input {
   font-size: 0.9rem;
   font-weight: 200;
 }
-input:invalid {
-  border: solid 0.05rem #ee4500;
-}
-input:invalid:not(:focus) {
-  border: solid 0.05rem #aaaaaa;
-}
-
-input:valid {
-  border: solid 0.05rem #0bb741;
-}
-
-input.notvalid {
-  border: solid 0.05rem #ee4500;
+input:focus {
+  border-color: #333333;
+  outline: none;
 }
 
 .error {

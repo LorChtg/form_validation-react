@@ -28,7 +28,6 @@ class RegisterForm extends React.Component {
     switch(fieldName) {
       case 'user_name':
         userNamePattern.test(fieldValue) ? this.state.name_error = '' : this.state.name_error = 'please, enter a username long of 1 to 30 letters'
-        //userNamePattern.test(fieldValue) ? this.state.name_valid = true : this.state.name_valid = false
         break;
       case 'user_email':
         mailPattern.test(fieldValue) ? this.state.email_error = '' : this.state.email_error = 'please, enter a valid gmail address'
@@ -47,13 +46,11 @@ class RegisterForm extends React.Component {
     this.setState({
       [name]: value
     })
-    console.log(this.state)
     this.handleValidation(name, value)
   }
 
   handleSubmit = (e) => {
     e.preventDefault()
-    //console.log(this.state)
   }
 
   render() {
