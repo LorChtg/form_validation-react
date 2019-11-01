@@ -25,15 +25,19 @@ var RegisterForm = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (RegisterForm.__proto__ || Object.getPrototypeOf(RegisterForm)).call(this, props));
 
     _this.handleValidation = function (fieldName, fieldValue) {
+      var userNamePattern = new RegExp(/^[A-Za-z\u00C0-\u00FF]{1,30}$/, '');
+      var mailPattern = new RegExp(/^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+[\.]*[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+@(gmail\.com)$/, '');
+      var passwordPattern = new RegExp(/^(?=(?:[\u0000-\u007F\u0080-\u00FF]*[A-Z]){1})(?=(?:[\u0000-\u007F\u0080-\u00FF]*[a-z])+)(?=([\u0000-\u007F\u0080-\u00FF]*\d)+)(?=([\u0000-\u007F\u0080-\u00FF]*[\u0000-\u002F\u003A-\u0040\u005B-\u0060\u007B-\u007F\u0080-\u00FF])+)[\u0000-\u007F\u0080-\u00FF]{9,30}$/, '');
       switch (fieldName) {
         case 'user_name':
-          _this.state.name_error = 'invalid username';
+          userNamePattern.test(fieldValue) ? _this.state.name_error = '' : _this.state.name_error = 'please, enter a username long of 1 to 30 letters';
+          //userNamePattern.test(fieldValue) ? this.state.name_valid = true : this.state.name_valid = false
           break;
         case 'user_email':
-          _this.state.email_error = 'invalid mail';
+          mailPattern.test(fieldValue) ? _this.state.email_error = '' : _this.state.email_error = 'please, enter a valid gmail address';
           break;
         case 'user_password':
-          _this.state.password_error = 'invalid password';
+          passwordPattern.test(fieldValue) ? _this.state.password_error = '' : _this.state.password_error = 'please, enter a valid password';
           break;
         default:
           break;
@@ -43,15 +47,14 @@ var RegisterForm = function (_React$Component) {
     _this.handleChange = function (e) {
       var name = e.target.name;
       var value = e.target.value;
-      _this.setState(_defineProperty({}, name, value), function () {
-        _this.handleValidation(name, value);
-      });
-      //console.log(this.state)
+      _this.setState(_defineProperty({}, name, value));
+      console.log(_this.state);
+      _this.handleValidation(name, value);
     };
 
     _this.handleSubmit = function (e) {
       e.preventDefault();
-      console.log(_this.state);
+      //console.log(this.state)
     };
 
     _this.state = {
@@ -65,7 +68,6 @@ var RegisterForm = function (_React$Component) {
       password_valid: 'false',
       password_error: ''
     };
-    _this.handleChange = _this.handleChange.bind(_this);
     _this.handleSubmit = _this.handleSubmit.bind(_this);
     return _this;
   }
@@ -73,9 +75,7 @@ var RegisterForm = function (_React$Component) {
   _createClass(RegisterForm, [{
     key: 'render',
     value: function render() {
-      var userNamePattern = '[A-Za-z\xC0-\xFF]{1,30}';
-      var mailPattern = "^[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+[\.]*[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+@(gmail\.com)$";
-      var passwordPattern = '[\0-\x7F\x80-\xFF]{9,30}$';
+      var _this2 = this;
 
       return React.createElement(
         'form',
@@ -88,7 +88,9 @@ var RegisterForm = function (_React$Component) {
             { className: 'label' },
             'Username'
           ),
-          React.createElement('input', { onChange: this.handleChange, type: 'text', id: 'username', name: 'user_name' }),
+          React.createElement('input', { onChange: function onChange(e) {
+              return _this2.handleChange(e);
+            }, type: 'text', id: 'username', name: 'user_name' }),
           React.createElement(
             'span',
             { className: 'error', 'aria-live': 'polite' },
@@ -103,7 +105,9 @@ var RegisterForm = function (_React$Component) {
             { className: 'label' },
             'Email address'
           ),
-          React.createElement('input', { onChange: this.handleChange, type: 'email', id: 'email', name: 'user_email' }),
+          React.createElement('input', { onChange: function onChange(e) {
+              return _this2.handleChange(e);
+            }, type: 'email', id: 'email', name: 'user_email' }),
           React.createElement(
             'span',
             { className: 'error', 'aria-live': 'polite' },
@@ -118,7 +122,9 @@ var RegisterForm = function (_React$Component) {
             { className: 'label' },
             'Password'
           ),
-          React.createElement('input', { onChange: this.handleChange, type: 'text', id: 'password', name: 'user_password' }),
+          React.createElement('input', { onChange: function onChange(e) {
+              return _this2.handleChange(e);
+            }, type: 'text', id: 'password', name: 'user_password' }),
           React.createElement(
             'span',
             { className: 'error', 'aria-live': 'polite' },
