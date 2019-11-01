@@ -30,12 +30,15 @@ var RegisterForm = function (_React$Component) {
       var passwordPattern = new RegExp(/^(?=(?:[\u0000-\u007F\u0080-\u00FF]*[A-Z]){1})(?=(?:[\u0000-\u007F\u0080-\u00FF]*[a-z])+)(?=([\u0000-\u007F\u0080-\u00FF]*\d)+)(?=([\u0000-\u007F\u0080-\u00FF]*[\u0000-\u002F\u003A-\u0040\u005B-\u0060\u007B-\u007F\u0080-\u00FF])+)[\u0000-\u007F\u0080-\u00FF]{9,30}$/, '');
       switch (fieldName) {
         case 'user_name':
+          _this.state.name_valid = userNamePattern.test(fieldValue);
           userNamePattern.test(fieldValue) ? _this.state.name_error = '' : _this.state.name_error = 'please, enter a username long of 1 to 30 letters';
           break;
         case 'user_email':
+          _this.state.email_valid = mailPattern.test(fieldValue);
           mailPattern.test(fieldValue) ? _this.state.email_error = '' : _this.state.email_error = 'please, enter a valid gmail address';
           break;
         case 'user_password':
+          _this.state.password_valid = passwordPattern.test(fieldValue);
           passwordPattern.test(fieldValue) ? _this.state.password_error = '' : _this.state.password_error = 'please, enter a valid password';
           break;
         default:
@@ -52,6 +55,8 @@ var RegisterForm = function (_React$Component) {
 
     _this.handleSubmit = function (e) {
       e.preventDefault();
+      _this.state.name_valid && _this.state.email_valid && _this.state.password_valid ? _this.state.form_valid = true : _this.state.form_valid = false;
+      console.log(_this.state);
     };
 
     _this.state = {
@@ -63,7 +68,8 @@ var RegisterForm = function (_React$Component) {
       email_error: '',
       user_password: '',
       password_valid: 'false',
-      password_error: ''
+      password_error: '',
+      form_valid: 'false'
     };
     _this.handleSubmit = _this.handleSubmit.bind(_this);
     return _this;

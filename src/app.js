@@ -16,7 +16,8 @@ class RegisterForm extends React.Component {
       email_error: '',
       user_password: '',
       password_valid: 'false',
-      password_error: ''
+      password_error: '',
+      form_valid: 'false'
     }
     this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -27,13 +28,16 @@ class RegisterForm extends React.Component {
     const passwordPattern = new RegExp(/^(?=(?:[\u0000-\u007F\u0080-\u00FF]*[A-Z]){1})(?=(?:[\u0000-\u007F\u0080-\u00FF]*[a-z])+)(?=([\u0000-\u007F\u0080-\u00FF]*\d)+)(?=([\u0000-\u007F\u0080-\u00FF]*[\u0000-\u002F\u003A-\u0040\u005B-\u0060\u007B-\u007F\u0080-\u00FF])+)[\u0000-\u007F\u0080-\u00FF]{9,30}$/, '')
     switch(fieldName) {
       case 'user_name':
+        this.state.name_valid = userNamePattern.test(fieldValue)
         userNamePattern.test(fieldValue) ? this.state.name_error = '' : this.state.name_error = 'please, enter a username long of 1 to 30 letters'
         break;
       case 'user_email':
+        this.state.email_valid = mailPattern.test(fieldValue)
         mailPattern.test(fieldValue) ? this.state.email_error = '' : this.state.email_error = 'please, enter a valid gmail address'
         break;
       case 'user_password':
-          passwordPattern.test(fieldValue) ? this.state.password_error = '' : this.state.password_error = 'please, enter a valid password'
+        this.state.password_valid = passwordPattern.test(fieldValue)
+        passwordPattern.test(fieldValue) ? this.state.password_error = '' : this.state.password_error = 'please, enter a valid password'
         break;
       default:
         break;
@@ -48,9 +52,11 @@ class RegisterForm extends React.Component {
     })
     this.handleValidation(name, value)
   }
-
+  
   handleSubmit = (e) => {
     e.preventDefault()
+    this.state.name_valid && this.state.email_valid && this.state.password_valid ? this.state.form_valid = true : this.state.form_valid = false
+    console.log(this.state)
   }
 
   render() {
